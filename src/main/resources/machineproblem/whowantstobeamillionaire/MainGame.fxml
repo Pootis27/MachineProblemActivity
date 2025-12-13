@@ -46,9 +46,6 @@
          </children>
       </GridPane>
    </center>
-   <bottom>
-      <HBox prefHeight="140.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
-   </bottom>
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
    </left>
@@ -98,4 +95,27 @@
          </children>
       </GridPane>
    </top>
+   <bottom>
+      <GridPane prefHeight="112.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="lifeline4" mnemonicParsing="false" onAction="#lifeline4" prefHeight="69.0" prefWidth="179.0" text="Button" GridPane.columnIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="lifeline3" mnemonicParsing="false" onAction="#lifeline3" prefHeight="69.0" prefWidth="179.0" text="Button" GridPane.columnIndex="2" />
+            <Button fx:id="lifeline2" mnemonicParsing="false" onAction="#lifeline2" prefHeight="69.0" prefWidth="179.0" text="Button" GridPane.columnIndex="1" />
+            <Button fx:id="lifeline1" mnemonicParsing="false" onAction="#lifeline1" prefHeight="69.0" prefWidth="179.0" text="Button" />
+         </children>
+      </GridPane>
+   </bottom>
 </BorderPane>

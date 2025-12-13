@@ -19,8 +19,6 @@ public class MainGame {
         return trimmed;
     }
 
-
-
     public boolean[] answerChecker(int choice) {
         boolean[] verified = {false,false};
         if (choice == correct_answer) {
@@ -43,9 +41,34 @@ public class MainGame {
         System.out.println("ya lose lmao");
     }
 
-    public void addScore() {
-        //TODO: score logic
+    public String lifeline1() {
+        //TODO: Call a friend logic. We know the correct answer in this class. Get that and then have like a 70% chance of the friend being right.
+        //TODO: make sure also to keep track of when it has been used in the game or not
+        //NOTE: better to not change the name so UI guy doesn't have to update what needs to be called
+        return "";
     }
+
+    public int[] lifeline2() {
+        //TODO: Audience vote logic. We can do like 100 runs of random generation where the correct answer has like 40% of being picked while the others have lik 20% of being picked
+        //TODO: make sure also to keep track of when it has been used in the game or not
+        return new int[] {40,20,20,20};
+    }
+
+    public int[] lifeline3() {
+        //TODO: 50/50. just return int to symbolize the options that we want to hide. make sure not to hide the answer (this class should know it)
+        return new int[] {50,50};
+    }
+
+    public void lifeline4() {
+        //TODO: good luck
+    }
+
+    public int ladder() {
+        //TODO: score logic
+        //Returns an int for both ladder and keeping track of score too!
+        return 300;
+    }
+
 
 
 }

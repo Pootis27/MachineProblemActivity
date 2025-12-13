@@ -15,69 +15,48 @@ public class MainGameController {
     @FXML protected Button buttonC;
     @FXML protected Button buttonD;
 
-
     @FXML
     protected void answerA() {
-        boolean[] verified = newGame.answerChecker(1);
-        if(verified[0]) {
-            if(verified[1]) {
-                newGame.gameCompleted();
-            }
-            else {
-                questionSetup();
-            }
-        }
-        else {
-            newGame.gameOver();
-        }
+        handleAnswer(1);
     }
 
     @FXML
     protected void answerB() {
-        boolean[] verified = newGame.answerChecker(2);
-        if(verified[0]) {
-            if(verified[1]) {
-                newGame.gameCompleted();
-            }
-            else {
-                questionSetup();
-            }
-        }
-        else {
-            newGame.gameOver();
-        }
+        handleAnswer(2);
     }
 
     @FXML
     protected void answerC() {
-        boolean[] verified = newGame.answerChecker(3);
-        if(verified[0]) {
-            if(verified[1]) {
-                newGame.gameCompleted();
-            }
-            else {
-                questionSetup();
-            }
-        }
-        else {
-            newGame.gameOver();
-        }
+        handleAnswer(3);
     }
 
     @FXML
     protected void answerD() {
-        boolean[] verified = newGame.answerChecker(4);
-        if(verified[0]) {
-            if(verified[1]) {
-                newGame.gameCompleted();
-            }
-            else {
-                questionSetup();
-            }
-        }
-        else {
-            newGame.gameOver();
-        }
+        handleAnswer(4);
+    }
+
+    @FXML
+    private void lifeline1() {
+        System.out.println("TRIGGERED LIFELINE!!");
+        //TODO: Call a friend. You can use TTS or just a pop up box. Call newGame.lifeline1(). Implement the method inside the MainGame class. Then handle the ui stuff here
+    }
+
+    @FXML
+    private void lifeline2() {
+        System.out.println("TRIGGERED LIFELINE!!");
+        //TODO: Audience vote. Show a graph or whatever representation you deem good enough. Call newGame.lifeline2(). Implement the method inside MainGame class then handle ui stuff here
+    }
+
+    @FXML
+    private void lifeline3() {
+        System.out.println("TRIGGERED LIFELINE!!");
+        //TODO: 50/50. hide or color two wrong option. Call newGame.lifeline3(). Implement the method inside MainGame class then handle ui stuff here.
+    }
+
+    @FXML
+    private void lifeline4() {
+        System.out.println("TRIGGERED LIFELINE!!");
+        //TODO: idk think of another lifeline lmao
     }
 
     @FXML
@@ -101,4 +80,20 @@ public class MainGameController {
         buttonC.setText(question_setup[3]);
         buttonD.setText(question_setup[4]);
     }
+
+    private void handleAnswer(int answerNumber) {
+        boolean[] verified = newGame.answerChecker(answerNumber);
+
+        if (verified[0]) {
+            if (verified[1]) {
+                newGame.gameCompleted();
+            } else {
+
+                questionSetup();
+            }
+        } else {
+            newGame.gameOver();
+        }
+    }
+
 }
