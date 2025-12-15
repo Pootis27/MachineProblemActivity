@@ -155,11 +155,6 @@ public class MainGame {
         }
     }
 
-    public int getGuaranteedPrize() {
-        // safe prizes at 1k and 32k
-        if (score < PRIZE_VALUES[4]) return 0;
-        else if (score < PRIZE_VALUES[9]) return PRIZE_VALUES[4];
-        else return PRIZE_VALUES[9];
-    }
+
 
 }
