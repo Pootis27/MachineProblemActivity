@@ -4,33 +4,38 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class QuestionSetup {
 
     private static final List<String[]> questions = new ArrayList<>();
+    private static final List<String[]> unusedQuestions = new ArrayList<>(); // for tracking unused
+    private static final List<String> names = new ArrayList<>();
+    private static final List<String> dates = new ArrayList<>();
+    private static final List<String> objects = new ArrayList<>();
     private static final Random rand = new Random();
 
     static {
-        loadCSV();
+        loadCSVQuestions();
+        loadCategoryCSV("names.csv", names);
+        loadCategoryCSV("dates.csv", dates);
+        loadCategoryCSV("objects.csv", objects);
+        resetQuestions(); // initially populate unusedQuestions
     }
 
-    private static void loadCSV() {
-        try {
-            InputStream in = QuestionSetup.class.getResourceAsStream("questions.csv");
+    private static void loadCSVQuestions() {
+        try (InputStream in = QuestionSetup.class.getResourceAsStream("questions.csv");
+             BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
+
             if (in == null) {
                 System.err.println("CSV FILE NOT FOUND YOU DUM DUM");
                 return;
             }
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;
             boolean skipHeader = true;
-
             while ((line = br.readLine()) != null) {
-                if (skipHeader) { skipHeader = false; continue; } // skip header
+                if (skipHeader) { skipHeader = false; continue; }
                 String[] row = line.split(",");
                 questions.add(row);
             }
@@ -40,14 +45,93 @@ public class QuestionSetup {
         }
     }
 
+    private static void loadCategoryCSV(String fileName, List<String> targetList) {
+        try (InputStream in = QuestionSetup.class.getResourceAsStream(fileName);
+             BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
+
+            if (in == null) {
+                System.err.println(fileName + " NOT FOUND!");
+                return;
+            }
+
+            String line;
+            boolean skipHeader = true;
+            while ((line = br.readLine()) != null) {
+                if (skipHeader) { skipHeader = false; continue; }
+                targetList.add(line.trim());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Reset unused questions back to full list
+    public static void resetQuestions() {
+        unusedQuestions.clear();
+        unusedQuestions.addAll(questions);
+    }
+
     public static String[] generateQuestion() {
-        if (questions.isEmpty()) {
-            System.err.println("NO QUESTIONS LOADED YOU ABSOLUTE MUFFIN");
-            return new String[]{"ERROR", "ERR", "ERR", "ERR", "ERR", "1"};
+        if (unusedQuestions.isEmpty()) {
+            System.err.println("ALL QUESTIONS USED! RESETTING...");
+            resetQuestions();
         }
 
-        // Return exactly like your previous format:
-        // [question, A, B, C, D, correct_index]
-        return questions.get(rand.nextInt(questions.size()));
+        // Pick a random question from unused questions
+        int index = rand.nextInt(unusedQuestions.size());
+        String[] picked = unusedQuestions.remove(index); // remove to avoid repeat
+
+        String questionText = picked[0];
+        String category = picked[1];
+        String correctAnswer = picked[2];
+
+        // Get the appropriate category list
+        List<String> categoryList;
+        switch (category.toLowerCase()) {
+            case "name" -> categoryList = names;
+            case "date" -> categoryList = dates;
+            case "object" -> categoryList = objects;
+            default -> {
+                System.err.println("Unknown category: " + category);
+                categoryList = new ArrayList<>();
+            }
+        }
+
+        // Prepare 4 options
+        String[] options = new String[4];
+        int correctIndex = rand.nextInt(4);
+        options[correctIndex] = correctAnswer;
+
+        // Pick 3 wrong options
+        int added = 0;
+        while (added < 3 && !categoryList.isEmpty()) {
+            String candidate = categoryList.get(rand.nextInt(categoryList.size()));
+            boolean duplicate = false;
+            for (String opt : options) {
+                if (candidate.equals(opt)) {
+                    duplicate = true;
+                    break;
+                }
+            }
+            if (!duplicate) {
+                for (int i = 0; i < 4; i++) {
+                    if (options[i] == null) {
+                        options[i] = candidate;
+                        break;
+                    }
+                }
+                added++;
+            }
+        }
+
+        return new String[]{
+                questionText,
+                options[0],
+                options[1],
+                options[2],
+                options[3],
+                String.valueOf(correctIndex)
+        };
     }
 }
