@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="machineproblem.whowantstobeamillionaire.MainGameController">
+
+    <!-- TOP: Question and Round -->
+    <top>
+        <VBox spacing="10.0" BorderPane.alignment="CENTER">
+            <Label fx:id="questionLabel" style="-fx-font-size: 38;" text="Question goes here" wrapText="true" />
+            <Label fx:id="roundCounter" style="-fx-font-size: 24;" text="Round 1 / 5" />
+        </VBox>
+    </top>
+
+    <!-- CENTER: Answer Buttons in 2x2 Grid -->
+    <center>
+        <GridPane alignment="CENTER" hgap="20" vgap="20">
+            <Button fx:id="buttonA" onAction="#answerA" prefHeight="120" prefWidth="250" text="A" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Button fx:id="buttonB" onAction="#answerB" prefHeight="120" prefWidth="250" text="B" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Button fx:id="buttonC" onAction="#answerC" prefHeight="120" prefWidth="250" text="C" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Button fx:id="buttonD" onAction="#answerD" prefHeight="120" prefWidth="250" text="D" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+    </center>
+
+    <!-- BOTTOM: Lifelines -->
+    <bottom>
+        <HBox alignment="CENTER" spacing="20">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <Button fx:id="lifeline3" onAction="#lifeline3" prefHeight="70" prefWidth="180" text="50/50" />
+            <Button fx:id="lifeline2" onAction="#lifeline2" prefHeight="70" prefWidth="180" text="Audience" />
+            <Button fx:id="lifeline1" onAction="#lifeline1" prefHeight="70" prefWidth="180" text="Call a Friend" />
+            <Button fx:id="lifeline4" onAction="#lifeline4" prefHeight="70" prefWidth="180" text="Mystery" />
+        </HBox>
+    </bottom>
+
+    <!-- LEFT/RIGHT: Optional Score/Ladder -->
+    <left>
+        <VBox alignment="CENTER" spacing="10">
+            <Label style="-fx-font-size: 20;" text="Score Ladder" />
+            <!-- Example rectangle representing ladder -->
+            <Rectangle fill="DODGERBLUE" height="400" stroke="BLACK" width="100" />
+        </VBox>
+    </left>
+
+</BorderPane>
