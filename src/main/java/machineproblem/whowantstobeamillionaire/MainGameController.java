@@ -182,6 +182,22 @@ public class MainGameController {
 
     @FXML protected void playAgain() throws IOException {
         loadFXML("GameScreen.fxml");
+    private void handleAnswer(int answerNumber) {
+        boolean[] verified = newGame.answerChecker(answerNumber);
+
+        if (verified[0]) {
+            System.out.println("Correct! Current Prize: $" + newGame.score);
+            if (verified[1]) {
+                newGame.gameCompleted();
+            } else {
+                questionSetup();
+            }
+        } else { //calls guaranteed prize money for gameover
+            newGame.gameOver();
+            int checkpointMoney = newGame.getGuaranteedPrize();
+            System.out.println("WRONG! You go home with: $" + checkpointMoney);
+            newGame.gameOver();
+        }
     }
 
     @FXML protected void goToMainMenu() throws IOException {
