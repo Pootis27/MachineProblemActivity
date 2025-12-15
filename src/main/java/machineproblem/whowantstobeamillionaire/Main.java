@@ -11,9 +11,10 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MainMenu.fxml"));
+        stage.initStyle(StageStyle.UTILITY);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MainGame.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Who Wants to Be a Millionaire");
+        stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
     }
