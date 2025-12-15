@@ -13,6 +13,7 @@ public class QuestionSetup {
     private static final List<String> names = new ArrayList<>();
     private static final List<String> dates = new ArrayList<>();
     private static final List<String> objects = new ArrayList<>();
+    private static final List<String> places= new ArrayList<>();
     private static final Random rand = new Random();
 
     static {
@@ -20,6 +21,7 @@ public class QuestionSetup {
         loadCategoryCSV("names.csv", names);
         loadCategoryCSV("dates.csv", dates);
         loadCategoryCSV("objects.csv", objects);
+        loadCategoryCSV("places.csv", places);
         resetQuestions(); // initially populate unusedQuestions
     }
 
@@ -92,6 +94,7 @@ public class QuestionSetup {
             case "name" -> categoryList = names;
             case "date" -> categoryList = dates;
             case "object" -> categoryList = objects;
+            case "place" -> categoryList = places;
             default -> {
                 System.err.println("Unknown category: " + category);
                 categoryList = new ArrayList<>();
