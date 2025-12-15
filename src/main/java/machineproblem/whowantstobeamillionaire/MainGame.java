@@ -3,7 +3,13 @@ package machineproblem.whowantstobeamillionaire;
 import java.util.Random;
 
 public class MainGame {
-    final int MAX_ROUND = 5;        //set to 1 for easier testing of game end and game complete
+    // Standard 15-round prize money
+    private final int[] PRIZE_VALUES = {
+            100, 200, 300, 500, 1000,       // Q1-Q5
+            2000, 4000, 8000, 16000, 32000, // Q6-Q10
+            64000, 125000, 250000, 500000, 1000000 // Q11-Q15
+    };
+    final int MAX_ROUND = 15;        //set to 1 for easier testing of game end and game complete
     private int correct_answer;
     private final int trials = 100; //for lifeline1
     public int score;
@@ -131,9 +137,21 @@ public class MainGame {
     }
 
     public int ladder() {
-        //TODO: score logic
-        //Returns an int for both ladder and keeping track of score too!
-        return 300;
+        //  -2 is done because round is set to next question. (ex. if round1 win, 'round' = 2,
+        // but we need index 0 for round1 prize money
+        int completedRoundIndex = round - 2;
+
+        if (completedRoundIndex >= 0 && completedRoundIndex < PRIZE_VALUES.length) {
+            this.score = PRIZE_VALUES[completedRoundIndex];
+        } else if (completedRoundIndex >= PRIZE_VALUES.length) {
+            // case if round 15 has just been won
+            this.score = PRIZE_VALUES[PRIZE_VALUES.length - 1];
+        } else {
+            // start of game
+            this.score = 0;
+        }
+
+        return this.score;
     }
 
 

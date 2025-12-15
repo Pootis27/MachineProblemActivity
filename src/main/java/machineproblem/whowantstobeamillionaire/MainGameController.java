@@ -106,6 +106,9 @@ public class MainGameController {
         boolean[] verified = newGame.answerChecker(answerNumber);
 
         if (verified[0]) {
+            int currentPrize = newGame.ladder();
+            // temp output
+            System.out.println("Correct! Current Prize: $" + currentPrize);
             if (verified[1]) {
                 newGame.gameCompleted();
             } else {
