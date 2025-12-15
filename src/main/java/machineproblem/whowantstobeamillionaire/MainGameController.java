@@ -106,16 +106,16 @@ public class MainGameController {
         boolean[] verified = newGame.answerChecker(answerNumber);
 
         if (verified[0]) {
-            int currentPrize = newGame.ladder();
-            // temp output
-            System.out.println("Correct! Current Prize: $" + currentPrize);
+            System.out.println("Correct! Current Prize: $" + newGame.score);
             if (verified[1]) {
                 newGame.gameCompleted();
             } else {
-
                 questionSetup();
             }
-        } else {
+        } else { //calls guaranteed prize money for gameover
+            newGame.gameOver();
+            int checkpointMoney = newGame.getGuaranteedPrize();
+            System.out.println("WRONG! You go home with: $" + checkpointMoney);
             newGame.gameOver();
         }
     }

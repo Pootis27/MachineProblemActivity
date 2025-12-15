@@ -1,5 +1,7 @@
 package machineproblem.whowantstobeamillionaire;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class MainGame {
@@ -42,6 +44,7 @@ public class MainGame {
         if (choice == correct_answer) {
             verified[0] = true;
             round++;
+            updateScore();
         }
         if(round > MAX_ROUND) {
             verified[1] = true;
@@ -136,7 +139,7 @@ public class MainGame {
         //TODO: good luck
     }
 
-    public int ladder() {
+    public void updateScore() {
         //  -2 is done because round is set to next question. (ex. if round1 win, 'round' = 2,
         // but we need index 0 for round1 prize money
         int completedRoundIndex = round - 2;
@@ -150,10 +153,13 @@ public class MainGame {
             // start of game
             this.score = 0;
         }
-
-        return this.score;
     }
 
-
+    public int getGuaranteedPrize() {
+        // safe prizes at 1k and 32k
+        if (score < PRIZE_VALUES[4]) return 0;
+        else if (score < PRIZE_VALUES[9]) return PRIZE_VALUES[4];
+        else return PRIZE_VALUES[9];
+    }
 
 }
