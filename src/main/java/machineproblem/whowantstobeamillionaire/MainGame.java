@@ -1,10 +1,22 @@
 package machineproblem.whowantstobeamillionaire;
 
+import java.util.Random;
+
 public class MainGame {
     final int MAX_ROUND = 5;        //set to 1 for easier testing of game end and game complete
-    private int correct_answer = 4;
-    public int score = 0;
-    public int round = 1;
+    private int correct_answer;
+    private final int trials = 100; //for lifeline1
+    public int score;
+    public int round;
+    private final Random rand = new Random();
+
+
+    public MainGame() {
+        this.round = 1;
+        this.score = 0;
+        this.correct_answer = -1; // invalid until a question is set
+    }
+
 
     public String[] setupQuestion() {
         String[] current_setup = QuestionSetup.generateQuestion();
@@ -41,22 +53,77 @@ public class MainGame {
         System.out.println("ya lose lmao");
     }
 
-    public String lifeline1() {
+    public int lifeline1() {
         //TODO: Call a friend logic. We know the correct answer in this class. Get that and then have like a 70% chance of the friend being right.
         //TODO: make sure also to keep track of when it has been used in the game or not
         //NOTE: better to not change the name so UI guy doesn't have to update what needs to be called
-        return "";
+
+        // 70% chance to return the correct answer
+        if (rand.nextDouble() < 0.7) {
+            return correct_answer;
+        }
+
+        // 30% chance: pick one of the 3 wrong answers
+        int pick = rand.nextInt(3); // 0, 1, or 2
+
+        // Shift index to skip correct_answer
+        if (pick >= correct_answer) {
+            pick++;
+        }
+        return pick;
     }
 
+
     public int[] lifeline2() {
-        //TODO: Audience vote logic. We can do like 100 runs of random generation where the correct answer has like 40% of being picked while the others have lik 20% of being picked
-        //TODO: make sure also to keep track of when it has been used in the game or not
-        return new int[] {40,20,20,20};
+        int[] counts = new int[4];
+
+        for (int i = 0; i < trials; i++) {
+            double r = rand.nextDouble();
+
+            if (r < 0.4) {
+                counts[correct_answer]++;
+            } else {
+                int pick;
+                do {
+                    pick = rand.nextInt(4);
+                } while (pick == correct_answer);
+
+                counts[pick]++;
+            }
+        }
+        return counts;
     }
 
     public int[] lifeline3() {
-        //TODO: 50/50. just return int to symbolize the options that we want to hide. make sure not to hide the answer (this class should know it)
-        return new int[] {50,50};
+        // Create array of wrong options only
+        int[] wrongOptions = new int[3];
+        int idx = 0;
+        for (int i = 0; i < 4; i++) {
+            if (i != correct_answer) {
+                wrongOptions[idx++] = i;
+            }
+        }
+
+        Random rand = new Random();
+
+        // Pick first wrong option
+        int firstIdx = rand.nextInt(wrongOptions.length);
+        int first = wrongOptions[firstIdx];
+
+        // Remove the first pick from the array
+        int[] remaining = new int[wrongOptions.length - 1];
+        int j = 0;
+        for (int i = 0; i < wrongOptions.length; i++) {
+            if (i != firstIdx) {
+                remaining[j++] = wrongOptions[i];
+            }
+        }
+
+        // Pick second wrong option from remaining
+        int secondIdx = rand.nextInt(remaining.length);
+        int second = remaining[secondIdx];
+
+        return new int[]{first, second};
     }
 
     public void lifeline4() {
