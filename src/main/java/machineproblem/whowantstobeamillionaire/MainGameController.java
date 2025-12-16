@@ -27,6 +27,7 @@ public class MainGameController {
     @FXML protected Button lifeline4; // to be added
 
     private Button[] answerButtons;
+    public boolean lifeline4Status;
 
     // resources Main Menu
     @FXML protected Button startButton;
@@ -46,9 +47,8 @@ public class MainGameController {
         } else if (questionLabel != null) {
             // Game Screen loaded
             setupGameScreen();
-        } else if (endMessage != null) {
-            // load end screen
-        }
+        }  // load end screen
+
     }
 
     // Main Menu
@@ -78,7 +78,11 @@ public class MainGameController {
         roundCounter.setText("Round " + newGame.round + " / " + newGame.MAX_ROUND);
 
         // Reset answer buttons visibility
-        for (Button btn : answerButtons) btn.setVisible(true);
+        for (Button btn : answerButtons) {
+            btn.setVisible(true);
+            btn.setStyle(""); // 👈 CLEAR previous color
+            btn.setDisable(false); // optional safety
+        }
 
     }
 
@@ -104,8 +108,13 @@ public class MainGameController {
     }
 
     private void handleAnswer(int answerNumber) {
-        boolean[] verified = newGame.answerChecker(answerNumber);
+        if(lifeline4Status) {
+            lifeline4Logic(answerNumber);
+            return;
+        }
 
+
+        boolean[] verified = newGame.answerChecker(answerNumber);
         if (verified[0]) {
             if (verified[1]) {
                 // Game completed
@@ -151,9 +160,22 @@ public class MainGameController {
     // End Screen
     @FXML
     private void lifeline4() {
-        System.out.println("TRIGGERED LIFELINE!!");
-        //TODO: idk think of another lifeline lmao
+        lifeline4Status = true;
+        lifeline4.setVisible(false);
     }
+
+    private void lifeline4Logic(int answerNumber) {
+        lifeline4Status = false;
+        if(newGame.lifeline4(answerNumber)) {
+            answerButtons[answerNumber].setStyle("-fx-background-color:green");
+            System.out.println("THAT SHIT TRUE NOCAP FRFR");
+        }
+        else {
+            answerButtons[answerNumber].setStyle("-fx-background-color:red");
+            System.out.println("TURN BACK. THAT SHIT CAP");
+        }
+    }
+
     // End Screen
     private void endGame(boolean won) {
         try {

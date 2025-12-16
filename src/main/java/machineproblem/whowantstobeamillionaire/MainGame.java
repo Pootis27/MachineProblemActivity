@@ -1,7 +1,4 @@
 package machineproblem.whowantstobeamillionaire;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 public class MainGame {
@@ -135,8 +132,8 @@ public class MainGame {
         return new int[]{first, second};
     }
 
-    public void lifeline4() {
-        //TODO: good luck
+    public boolean lifeline4(int answer) {
+        return answer == correct_answer;
     }
 
     public void updateScore() {
