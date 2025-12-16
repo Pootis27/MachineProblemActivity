@@ -60,23 +60,23 @@ public class MainGame {
     }
 
     public int lifeline1() {
-        //TODO: Call a friend logic. We know the correct answer in this class. Get that and then have like a 70% chance of the friend being right.
-        //TODO: make sure also to keep track of when it has been used in the game or not
-        //NOTE: better to not change the name so UI guy doesn't have to update what needs to be called
-
+        int chosenAnswer;
         // 70% chance to return the correct answer
         if (rand.nextDouble() < 0.7) {
-            return correct_answer;
+            chosenAnswer = correct_answer;
+        } else {
+            int pick = rand.nextInt(3); // 0, 1, or 2
+
+            if (pick >= correct_answer) {
+                pick++;
+            }
+            chosenAnswer = pick;
         }
 
-        // 30% chance: pick one of the 3 wrong answers
-        int pick = rand.nextInt(3); // 0, 1, or 2
+        String text = "I think it is answer " + chosenAnswer;
+        VoiceModule.generateVoiceAndPlay(text);
 
-        // Shift index to skip correct_answer
-        if (pick >= correct_answer) {
-            pick++;
-        }
-        return pick;
+        return chosenAnswer;
     }
 
 
