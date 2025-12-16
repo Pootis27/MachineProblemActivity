@@ -152,6 +152,27 @@ public class MainGame {
         }
     }
 
+    public int getGuaranteedPrize() {
+        // Ensure the prize array exists
+        if (PRIZE_VALUES == null || PRIZE_VALUES.length < 10) {
+            return 0;
+        }
+
+        // Define Safe Haven amounts
+        // Index 4 = Round 5 ($1,000)
+        // Index 9 = Round 10 ($32,000)
+        int safeHaven1 = PRIZE_VALUES[4];
+        int safeHaven2 = PRIZE_VALUES[9];
+
+        // Logic: check which safe haven the player has passed
+        if (score >= safeHaven2) {
+            return safeHaven2; // Guaranteed $32,000
+        } else if (score >= safeHaven1) {
+            return safeHaven1; // Guaranteed $1,000
+        } else {
+            return 0; // Haven't reached the first safe haven yet
+        }
+    }
 
 
 }

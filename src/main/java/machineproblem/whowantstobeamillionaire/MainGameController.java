@@ -183,7 +183,14 @@ public class MainGameController {
             Parent root = loader.load();
 
             MainGameController endController = loader.getController();
-            endController.setEndScreenData(won, newGame.score);
+            int finalPrize;
+            if (won) {
+                finalPrize = newGame.score; //1 million grand prize
+            } else {
+                // safe haven prizes
+                finalPrize = newGame.getGuaranteedPrize();
+            }
+            endController.setEndScreenData(won, finalPrize);
 
             Stage stage = (Stage) questionLabel.getScene().getWindow();
             stage.setScene(new Scene(root));
