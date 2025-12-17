@@ -2,22 +2,22 @@ package machineproblem.whowantstobeamillionaire;
 
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-// Adding notes to partition the controllers domain in fxml files.
-public class MainGameController {
+// Game Screen Partition
+public class GameScreenController {
 
     private MainGame newGame;
 
@@ -36,11 +36,7 @@ public class MainGameController {
     private Button[] answerButtons;
     public boolean lifeline4Status;
 
-    // resources Main Menu
-    @FXML protected Button startButton;
-
     // Ladder Score
-
     @FXML protected Rectangle ladderBox1;
     @FXML protected Rectangle ladderBox2;
     @FXML protected Rectangle ladderBox3;
@@ -59,14 +55,6 @@ public class MainGameController {
     private List<Rectangle> ladderBoxes;
     @FXML protected ImageView ladderImage;
 
-
-    // resources endscreen
-    @FXML protected Label endMessage;
-    @FXML protected Label finalScore;
-    @FXML protected Button playAgainButton;
-    @FXML protected Button mainMenuButton;
-
-    // initialize (moved initialize here and set it so only the partitions are initialized first
     @FXML
     public void initialize() {
         ladderBoxes = new ArrayList<>();
@@ -85,29 +73,9 @@ public class MainGameController {
         ladderBoxes.add(ladderBox13);
         ladderBoxes.add(ladderBox14);
         ladderBoxes.add(ladderBox15);
-
-        if (startButton != null) {
-            // Main Menu loaded
-            setupMainMenu();
-        } else if (questionLabel != null) {
-            // Game Screen loaded
-            setupGameScreen();
-        }  // load end screen
-
     }
 
-    // Main Menu
-    private void setupMainMenu() {
-        // Nothing special yet
-    }
-
-    @FXML
-    protected void startGame() throws IOException {
-        loadFXML("GameScreen.fxml");
-    }
-
-    // Game Screen Partition
-    private void setupGameScreen() {
+    public void startNewGame() {
         newGame = new MainGame();  // start new game
         answerButtons = new Button[]{buttonA, buttonB, buttonC, buttonD};
         loadNextQuestion();
@@ -126,47 +94,29 @@ public class MainGameController {
         // Reset answer buttons visibility
         for (Button btn : answerButtons) {
             btn.setVisible(true);
-            btn.setStyle(""); // 👈 CLEAR previous color
+            btn.setStyle(""); //  CLEAR previous color
             btn.setDisable(false); // optional safety
         }
-
     }
 
-    // Answer Handling (moved it all here)
-    @FXML
-    protected void answerA() {
-        handleAnswer(0);
-    }
-
-    @FXML
-    protected void answerB() {
-        handleAnswer(1);
-    }
-
-    @FXML
-    protected void answerC() {
-        handleAnswer(2);
-    }
-
-    @FXML
-    protected void answerD() {
-        handleAnswer(3);
-    }
+    // Answer Handling
+    @FXML protected void answerA() { handleAnswer(0); }
+    @FXML protected void answerB() { handleAnswer(1); }
+    @FXML protected void answerC() { handleAnswer(2); }
+    @FXML protected void answerD() { handleAnswer(3); }
 
     private void handleAnswer(int answerNumber) {
         // close graph regardless
         TestChartClass.closeGraph();
 
-        if(lifeline4Status) {
+        if (lifeline4Status) {
             lifeline4Logic(answerNumber);
             return;
         }
 
-
         boolean[] verified = newGame.answerChecker(answerNumber);
         if (verified[0]) {
             if (verified[1]) {
-                // Game completed
                 endGame(true);
             } else {
                 loadNextQuestion();
@@ -175,78 +125,58 @@ public class MainGameController {
             answerButtons[newGame.getCorrectAnswer()].setStyle("-fx-background-color: green;");
             answerButtons[answerNumber].setStyle("-fx-background-color: red;");
 
-            // Wait 3 seconds before ending game
             PauseTransition pause = new PauseTransition(Duration.seconds(3));
             pause.setOnFinished(event -> endGame(false));
             pause.play();
         }
     }
 
-
-    @FXML
-    private void lifeline1() {
+    @FXML private void lifeline1() {
         lifeline1.setVisible(false);
         System.out.println("TRIGGERED LIFELINE!!");
         int result = newGame.callAFriend();
         System.out.println(result);
     }
 
-    @FXML
-    private void lifeline2() {
+    @FXML private void lifeline2() {
         lifeline2.setVisible(false);
         System.out.println("TRIGGERED LIFELINE!!");
         int[] results = newGame.audienceVote();
-        for (int result : results) {
-            System.out.println(result);
-        }
+        for (int result : results) System.out.println(result);
         TestChartClass.showGraph(results);
     }
 
-    @FXML
-    private void lifeline3() {
+    @FXML private void lifeline3() {
         System.out.println("TRIGGERED LIFELINE!!");
         lifeline3.setVisible(false);
-        //TODO: 50/50. hide or color two wrong option. Call newGame.lifeline3(). Implement the method inside MainGame class then handle ui stuff here.
         int[] results = newGame.fiftyFifty();
-        for (int result : results) {
-            answerButtons[result].setVisible(false);
-        }
+        for (int result : results) answerButtons[result].setVisible(false);
     }
 
-    // End Screen
-    @FXML
-    private void lifeline4() {
+    @FXML private void lifeline4() {
         lifeline4Status = true;
         lifeline4.setVisible(false);
     }
 
     private void lifeline4Logic(int answerNumber) {
         lifeline4Status = false;
-        if(newGame.landMine(answerNumber)) {
+        if (newGame.landMine(answerNumber)) {
             answerButtons[answerNumber].setStyle("-fx-background-color:green");
             System.out.println("THAT SHIT TRUE NOCAP FRFR");
-        }
-        else {
+        } else {
             answerButtons[answerNumber].setStyle("-fx-background-color:red");
             System.out.println("TURN BACK. THAT SHIT CAP");
         }
     }
 
-    // End Screen
     private void endGame(boolean won) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("EndScreen.fxml"));
             Parent root = loader.load();
 
-            MainGameController endController = loader.getController();
-            int finalPrize;
-            if (won) {
-                finalPrize = newGame.score; //1 million grand prize
-            } else {
-                // safe haven prizes
-                finalPrize = newGame.getGuaranteedPrize();
-            }
-            endController.setEndScreenData(won, finalPrize);
+            EndScreenController controller = loader.getController();
+            int finalPrize = won ? newGame.score : newGame.getGuaranteedPrize();
+            controller.setEndScreenData(won, finalPrize);
 
             Stage stage = (Stage) questionLabel.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -255,35 +185,8 @@ public class MainGameController {
         }
     }
 
-    public void setEndScreenData(boolean won, int score) {
-        endMessage.setText(won ? "Congratulations!" : "Game Over!");
-        finalScore.setText("You won: $" + score);
-    }
-
-    @FXML protected void playAgain() throws IOException {
-        loadFXML("GameScreen.fxml");
-    }
-
-    @FXML protected void goToMainMenu() throws IOException {
-        loadFXML("MainMenu.fxml");
-    }
-    // Stuff
-    private void loadFXML(String fxmlFile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-        Parent root = loader.load();
-
-        Stage stage = (Stage) (startButton != null ? startButton.getScene().getWindow() :
-                questionLabel != null ? questionLabel.getScene().getWindow() :
-                        endMessage.getScene().getWindow());
-        stage.setScene(new Scene(root));
-    }
-
     public void updateLadder(int roundsWon) {
-        for(Rectangle boxes : ladderBoxes) {
-            boxes.setVisible(false);
-        }
-        for(int i = 0; i < roundsWon; i++) {
-            ladderBoxes.get(i).setVisible(true);
-        }
+        for (Rectangle box : ladderBoxes) box.setVisible(false);
+        for (int i = 0; i < roundsWon; i++) ladderBoxes.get(i).setVisible(true);
     }
 }
