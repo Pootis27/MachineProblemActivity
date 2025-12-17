@@ -1,5 +1,6 @@
 package machineproblem.whowantstobeamillionaire;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -7,6 +8,8 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.util.Duration;
+
 import java.io.IOException;
 
 // Adding notes to partition the controllers domain in fxml files.
@@ -108,6 +111,9 @@ public class MainGameController {
     }
 
     private void handleAnswer(int answerNumber) {
+        // close graph regardless
+        TestChartClass.closeGraph();
+
         if(lifeline4Status) {
             lifeline4Logic(answerNumber);
             return;
@@ -123,7 +129,13 @@ public class MainGameController {
                 loadNextQuestion();
             }
         } else {
-            endGame(false);
+            answerButtons[newGame.getCorrectAnswer()].setStyle("-fx-background-color: green;");
+            answerButtons[answerNumber].setStyle("-fx-background-color: red;");
+
+            // Wait 3 seconds before ending game
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            pause.setOnFinished(event -> endGame(false));
+            pause.play();
         }
     }
 
@@ -144,6 +156,7 @@ public class MainGameController {
         for (int result : results) {
             System.out.println(result);
         }
+        TestChartClass.showGraph(results);
     }
 
     @FXML

@@ -22,6 +22,10 @@ public class MainGame {
         this.correct_answer = -1; // invalid until a question is set
     }
 
+    public int getCorrectAnswer() {
+        return correct_answer;
+    }
+
 
     public String[] setupQuestion() {
         String[] current_setup = QuestionSetup.generateQuestion();
@@ -109,8 +113,6 @@ public class MainGame {
                 wrongOptions[idx++] = i;
             }
         }
-
-        Random rand = new Random();
 
         // Pick first wrong option
         int firstIdx = rand.nextInt(wrongOptions.length);
