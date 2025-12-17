@@ -3,15 +3,18 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="machineproblem.whowantstobeamillionaire.MainGameController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="machineproblem.whowantstobeamillionaire.MainGameController">
 
     <!-- TOP: Question and Round -->
     <top>
@@ -56,8 +59,50 @@
     <left>
         <VBox alignment="CENTER" spacing="10">
             <Label style="-fx-font-size: 20;" text="Score Ladder" />
-            <!-- Example rectangle representing ladder -->
-            <Rectangle fill="DODGERBLUE" height="400" stroke="BLACK" width="100" />
+         <StackPane alignment="BOTTOM_CENTER" prefHeight="457.0" prefWidth="200.0">
+            <children>
+               <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                     <Rectangle fx:id="ladderBox15" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="38.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0">
+                        <VBox.margin>
+                           <Insets />
+                        </VBox.margin>
+                     </Rectangle>
+                     <Rectangle fx:id="ladderBox14" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0">
+                        <VBox.margin>
+                           <Insets />
+                        </VBox.margin>
+                     </Rectangle>
+                     <Rectangle fx:id="ladderBox13" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0">
+                        <VBox.margin>
+                           <Insets />
+                        </VBox.margin>
+                     </Rectangle>
+                     <Rectangle fx:id="ladderBox12" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="28.0" layoutX="11.0" layoutY="393.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0">
+                        <VBox.margin>
+                           <Insets />
+                        </VBox.margin>
+                     </Rectangle>
+                     <Rectangle fx:id="ladderBox11" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox10" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox9" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox8" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="26.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox7" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox6" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox5" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="21.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox4" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox3" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox2" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="26.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox1" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="29.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                  </children>
+               </VBox>
+               <ImageView fx:id="ladderImage" fitHeight="492.0" fitWidth="197.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@ScoreLadder.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </StackPane>
         </VBox>
     </left>
 

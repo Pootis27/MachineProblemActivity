@@ -4,6 +4,8 @@ import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 // Adding notes to partition the controllers domain in fxml files.
 public class MainGameController {
@@ -35,6 +39,27 @@ public class MainGameController {
     // resources Main Menu
     @FXML protected Button startButton;
 
+    // Ladder Score
+
+    @FXML protected Rectangle ladderBox1;
+    @FXML protected Rectangle ladderBox2;
+    @FXML protected Rectangle ladderBox3;
+    @FXML protected Rectangle ladderBox4;
+    @FXML protected Rectangle ladderBox5;
+    @FXML protected Rectangle ladderBox6;
+    @FXML protected Rectangle ladderBox7;
+    @FXML protected Rectangle ladderBox8;
+    @FXML protected Rectangle ladderBox9;
+    @FXML protected Rectangle ladderBox10;
+    @FXML protected Rectangle ladderBox11;
+    @FXML protected Rectangle ladderBox12;
+    @FXML protected Rectangle ladderBox13;
+    @FXML protected Rectangle ladderBox14;
+    @FXML protected Rectangle ladderBox15;
+    private List<Rectangle> ladderBoxes;
+    @FXML protected ImageView ladderImage;
+
+
     // resources endscreen
     @FXML protected Label endMessage;
     @FXML protected Label finalScore;
@@ -44,6 +69,23 @@ public class MainGameController {
     // initialize (moved initialize here and set it so only the partitions are initialized first
     @FXML
     public void initialize() {
+        ladderBoxes = new ArrayList<>();
+        ladderBoxes.add(ladderBox1);
+        ladderBoxes.add(ladderBox2);
+        ladderBoxes.add(ladderBox3);
+        ladderBoxes.add(ladderBox4);
+        ladderBoxes.add(ladderBox5);
+        ladderBoxes.add(ladderBox6);
+        ladderBoxes.add(ladderBox7);
+        ladderBoxes.add(ladderBox8);
+        ladderBoxes.add(ladderBox9);
+        ladderBoxes.add(ladderBox10);
+        ladderBoxes.add(ladderBox11);
+        ladderBoxes.add(ladderBox12);
+        ladderBoxes.add(ladderBox13);
+        ladderBoxes.add(ladderBox14);
+        ladderBoxes.add(ladderBox15);
+
         if (startButton != null) {
             // Main Menu loaded
             setupMainMenu();
@@ -79,6 +121,7 @@ public class MainGameController {
         buttonC.setText(qSetup[3]);
         buttonD.setText(qSetup[4]);
         roundCounter.setText("Round " + newGame.round + " / " + newGame.MAX_ROUND);
+        updateLadder(newGame.round);
 
         // Reset answer buttons visibility
         for (Button btn : answerButtons) {
@@ -233,5 +276,14 @@ public class MainGameController {
                 questionLabel != null ? questionLabel.getScene().getWindow() :
                         endMessage.getScene().getWindow());
         stage.setScene(new Scene(root));
+    }
+
+    public void updateLadder(int roundsWon) {
+        for(Rectangle boxes : ladderBoxes) {
+            boxes.setVisible(false);
+        }
+        for(int i = 0; i < roundsWon; i++) {
+            ladderBoxes.get(i).setVisible(true);
+        }
     }
 }

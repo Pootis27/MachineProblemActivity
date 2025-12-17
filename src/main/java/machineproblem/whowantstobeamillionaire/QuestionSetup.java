@@ -59,12 +59,25 @@ public class QuestionSetup {
 
     private static void loadCategories() {
         names.addAll(List.of(
-                "Napoleon", "Shakespeare", "Einstein", "Cleopatra",
-                "Mozart", "Tesla", "Curie", "Lincoln",
-                "Galileo", "Da Vinci", "Newton",
-                "Genghis Khan", "Beethoven", "Hemingway",
-                "Tolkien", "Churchill", "Mandela",
-                "Socrates", "Columbus"
+                "Christopher Columbus",
+                "William Shakespeare",
+                "Napoleon Bonaparte",
+                "Albert Einstein",
+                "Cleopatra",
+                "Wolfgang Amadeus Mozart",
+                "Nikola Tesla",
+                "Marie Curie",
+                "Abraham Lincoln",
+                "Galileo Galilei",
+                "Leonardo da Vinci",
+                "Isaac Newton",
+                "Genghis Khan",
+                "Ludwig van Beethoven",
+                "Ernest Hemingway",
+                "J.R.R. Tolkien",
+                "Winston Churchill",
+                "Nelson Mandela",
+                "Socrates"
         ));
 
         dates.addAll(List.of(
