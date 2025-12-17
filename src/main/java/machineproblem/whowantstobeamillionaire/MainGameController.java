@@ -187,7 +187,7 @@ public class MainGameController {
     private void lifeline1() {
         lifeline1.setVisible(false);
         System.out.println("TRIGGERED LIFELINE!!");
-        int result = newGame.lifeline1();
+        int result = newGame.callAFriend();
         System.out.println(result);
     }
 
@@ -195,7 +195,7 @@ public class MainGameController {
     private void lifeline2() {
         lifeline2.setVisible(false);
         System.out.println("TRIGGERED LIFELINE!!");
-        int[] results = newGame.lifeline2();
+        int[] results = newGame.audienceVote();
         for (int result : results) {
             System.out.println(result);
         }
@@ -207,7 +207,7 @@ public class MainGameController {
         System.out.println("TRIGGERED LIFELINE!!");
         lifeline3.setVisible(false);
         //TODO: 50/50. hide or color two wrong option. Call newGame.lifeline3(). Implement the method inside MainGame class then handle ui stuff here.
-        int[] results = newGame.lifeline3();
+        int[] results = newGame.fiftyFifty();
         for (int result : results) {
             answerButtons[result].setVisible(false);
         }
@@ -222,7 +222,7 @@ public class MainGameController {
 
     private void lifeline4Logic(int answerNumber) {
         lifeline4Status = false;
-        if(newGame.lifeline4(answerNumber)) {
+        if(newGame.landMine(answerNumber)) {
             answerButtons[answerNumber].setStyle("-fx-background-color:green");
             System.out.println("THAT SHIT TRUE NOCAP FRFR");
         }
