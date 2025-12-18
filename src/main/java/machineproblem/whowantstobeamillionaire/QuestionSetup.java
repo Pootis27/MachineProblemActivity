@@ -56,6 +56,21 @@ public class QuestionSetup {
         questions.add(new String[]{
                 "Who invented the telephone?", "Name", "Alexander Graham Bell"
         });
+        questions.add(new String[]{
+                "Who is the Father of Computer Science?", "Name", "Alan Turing"
+        });
+        questions.add(new String[]{
+                "What is Thomas Edison usually credited for inventing?","object","Lightbulb"
+        });
+        questions.add(new String[]{
+                "What year did America sign the Treaty of Paris?","Date","1898"
+        });
+        questions.add(new String[]{
+                "What year did the Second Sino-Japanese War start?","Date","1937"
+        });
+        questions.add(new String[]{
+                "Who was the Scientist that Discovered Polonium?", "Name","Marie Curie"
+        });
     }
 
     private static void loadCategories() {
@@ -78,11 +93,12 @@ public class QuestionSetup {
                 "J.R.R. Tolkien",
                 "Winston Churchill",
                 "Nelson Mandela",
-                "Socrates"
+                "Socrates",
+                "Alan Turing"
         ));
 
         dates.addAll(List.of(
-                "1776", "1912", "1945", "1969", "1983", "1989", "2007"
+                "1776", "1912", "1945", "1969", "1983", "1989", "2007","2011","1898","1937"
         ));
 
         objects.addAll(List.of(

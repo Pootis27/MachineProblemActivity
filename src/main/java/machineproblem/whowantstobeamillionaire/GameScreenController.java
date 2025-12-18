@@ -24,6 +24,7 @@ public class GameScreenController {
     final int DRUM_ROLL_DURATION = 3;
     final int HIGHLIGHT_WRONG_AND_CORRECT_DURATION = 3;
     final int WRONG_CLIP_DURATION = 2;
+    private boolean forfeited = false;
 
     // resources Universal
     @FXML protected Label questionLabel;
@@ -121,6 +122,14 @@ public class GameScreenController {
             btn.setOpacity(1.0);
         }
     }
+    // Handle Forfeit ruling
+    @FXML private Button forfeitButton;
+
+    @FXML
+    private void forfeit() {
+        forfeited = true;
+        forfeitButton.setDisable(true); // prevent spamming
+    }
 
     // Answer Handling
     @FXML protected void answerA() { handleAnswer(0); }
@@ -178,6 +187,7 @@ public class GameScreenController {
                 PauseTransition wrongDelay = new PauseTransition(Duration.seconds(WRONG_CLIP_DURATION));
                 wrongDelay.setOnFinished(e -> {
                     AudioManager.getInstance().stopClip("Wrong");
+                    AudioManager.getInstance().setBackgroundVolume(0.5);
                     endGame(false);
                 });
                 wrongDelay.play();
@@ -192,7 +202,11 @@ public class GameScreenController {
         correctDelay.setOnFinished(e -> {
 
             AudioManager.getInstance().stopClip("Correct");
-            if (verified[1]) {
+            if (forfeited) {
+                AudioManager.getInstance().playBackground("/Audio/Winner.mp3", 0.5);
+                endGame(true);
+            } else if (verified[1]) {
+                AudioManager.getInstance().playBackground("/Audio/Winner.mp3", 0.5);
                 endGame(true);
             } else {
                 loadNextQuestion();
