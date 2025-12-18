@@ -20,6 +20,7 @@ public class MainGame {
     public int score;
     public int round;
     private final Random rand = new Random();
+    private final QuestionSetup questionSetup = new QuestionSetup();
 
 
     public MainGame() {
@@ -34,7 +35,7 @@ public class MainGame {
 
 
     public String[] setupQuestion() {
-        String[] current_setup = QuestionSetup.generateQuestion();
+        String[] current_setup = questionSetup.generateQuestion();
         correct_answer = Integer.parseInt(current_setup[5]);
         return new String[]{
                 current_setup[0],

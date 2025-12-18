@@ -6,8 +6,15 @@ import java.util.Random;
 
 public class QuestionSetup {
 
-    private static final List<String[]> questions = new ArrayList<>();
-    private static final List<String[]> unusedQuestions = new ArrayList<>();
+    public QuestionSetup() {
+        loadQuestions();
+        loadCategories();
+        resetQuestions();
+    }
+
+
+    private final List<String[]> questions = new ArrayList<>();
+    private final List<String[]> unusedQuestions = new ArrayList<>();
 
     private static final List<String> names = new ArrayList<>();
     private static final List<String> dates = new ArrayList<>();
@@ -16,15 +23,9 @@ public class QuestionSetup {
 
     private static final Random rand = new Random();
 
-    static {
-        loadQuestions();
-        loadCategories();
-        resetQuestions();
-    }
-
     /* -------------------- DATA SETUP -------------------- */
 
-    private static void loadQuestions() {
+    private void loadQuestions() {
         questions.add(new String[]{
                 "Who discovered America?", "Name", "Christopher Columbus"
         });
@@ -104,12 +105,12 @@ public class QuestionSetup {
 
     /* -------------------- GAME LOGIC -------------------- */
 
-    public static void resetQuestions() {
+    public void resetQuestions() {
         unusedQuestions.clear();
         unusedQuestions.addAll(questions);
     }
 
-    public static String[] generateQuestion() {
+    public String[] generateQuestion() {
         if (unusedQuestions.isEmpty()) {
             resetQuestions();
         }

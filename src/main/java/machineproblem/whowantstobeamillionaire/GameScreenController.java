@@ -101,7 +101,8 @@ public class GameScreenController {
     }
 
     private void loadNextQuestion() {
-        String[] qSetup = newGame.setupQuestion();
+        String[] qSetup;
+        qSetup = newGame.setupQuestion();
         questionLabel.setText(qSetup[0]);
         buttonA.setText("A. " + qSetup[1]);
         buttonB.setText("B. " + qSetup[2]);
