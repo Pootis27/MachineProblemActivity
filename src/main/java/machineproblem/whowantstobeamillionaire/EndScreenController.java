@@ -17,6 +17,7 @@ public class EndScreenController {
     @FXML protected Button playAgainButton;
     @FXML protected Button mainMenuButton;
 
+    // determines the winnings and the label of the end screen
     public void setEndScreenData(boolean won, int score) {
         endMessage.setText(won ? "Congratulations!" : "Game Over!");
         finalScore.setText("You won: $" + score);

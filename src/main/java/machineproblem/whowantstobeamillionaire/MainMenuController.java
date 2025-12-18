@@ -16,6 +16,7 @@ public class MainMenuController implements Initializable {
 
     @FXML protected Button startButton;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Play main menu background music at 50% volume

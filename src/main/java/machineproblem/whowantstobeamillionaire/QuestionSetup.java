@@ -13,9 +13,11 @@ public class QuestionSetup {
     }
 
 
+    // keeps track of questions to choose from and questions we haven't used yet
     private final List<String[]> questions = new ArrayList<>();
     private final List<String[]> unusedQuestions = new ArrayList<>();
 
+    // keeps track of the available options
     private static final List<String> names = new ArrayList<>();
     private static final List<String> dates = new ArrayList<>();
     private static final List<String> objects = new ArrayList<>();
@@ -25,6 +27,9 @@ public class QuestionSetup {
 
     /* -------------------- DATA SETUP -------------------- */
 
+    /**
+     * loads the question into the ArrayList in the form ["question", "category", "correct_answer"]
+     */
     private void loadQuestions() {
         questions.add(new String[]{
                 "Who discovered America?", "Name", "Christopher Columbus"
@@ -58,6 +63,9 @@ public class QuestionSetup {
         });
     }
 
+    /**
+     * loads the options for each category. soon to be used by generateQuestion()
+     */
     private static void loadCategories() {
         names.addAll(List.of(
                 "Christopher Columbus",
@@ -105,11 +113,16 @@ public class QuestionSetup {
 
     /* -------------------- GAME LOGIC -------------------- */
 
+    // just in case, clears all unused questions and adds in the newly loaded questions
     public void resetQuestions() {
         unusedQuestions.clear();
         unusedQuestions.addAll(questions);
     }
 
+    /**
+     * From the list of questions, pick a random one and from the category of the chosen, pick 3 random choices
+     * @return list of Strings in the form ["question", "option1", "option2", "option3", "option4", "correct_answer"]
+     */
     public String[] generateQuestion() {
         if (unusedQuestions.isEmpty()) {
             resetQuestions();
