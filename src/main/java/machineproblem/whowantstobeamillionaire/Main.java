@@ -15,6 +15,7 @@ public class Main extends Application {
         stage.setTitle("Who Wants to Be a Millionaire");
         stage.setScene(scene);
         stage.setResizable(false);
+        scene.getStylesheets().add(getClass().getResource("/machineproblem/whowantstobeamillionaire/styles.css").toExternalForm());
         stage.show();
     }
 

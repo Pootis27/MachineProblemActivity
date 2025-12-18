@@ -15,6 +15,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.paint.Color;
 
 // Game Screen Partition
 public class GameScreenController {
@@ -23,6 +24,7 @@ public class GameScreenController {
     final int DRUM_ROLL_DURATION = 3;
     final int HIGHLIGHT_WRONG_AND_CORRECT_DURATION = 3;
     final int WRONG_CLIP_DURATION = 2;
+
     // resources Universal
     @FXML protected Label questionLabel;
     @FXML protected Label roundCounter;
@@ -33,7 +35,7 @@ public class GameScreenController {
     @FXML protected Button lifeline1;
     @FXML protected Button lifeline2;
     @FXML protected Button lifeline3;
-    @FXML protected Button lifeline4; // to be added
+    @FXML protected Button lifeline4;
 
     private Button[] answerButtons;
     public boolean lifeline4Status;
@@ -64,10 +66,10 @@ public class GameScreenController {
         AudioManager.getInstance().stopBackground();
 
         // Play transition stinger first
-        AudioManager.getInstance().playClip("Transition1"); // your WAV stinger
+        AudioManager.getInstance().playClip("Transition1");
 
         // Wait for stinger duration before starting game background
-        PauseTransition stingerDelay = new PauseTransition(Duration.seconds(4)); // adjust to your stinger length
+        PauseTransition stingerDelay = new PauseTransition(Duration.seconds(4));
         stingerDelay.setOnFinished(event -> {
             // Start new background music for game screen
             AudioManager.getInstance().playBackground("/Audio/Background2-Stage1.mp3", 0.5);
@@ -99,20 +101,23 @@ public class GameScreenController {
     }
 
     private void loadNextQuestion() {
-        String[] qSetup = newGame.setupQuestion(); // use CSV generator
+        String[] qSetup = newGame.setupQuestion();
         questionLabel.setText(qSetup[0]);
-        buttonA.setText(qSetup[1]);
-        buttonB.setText(qSetup[2]);
-        buttonC.setText(qSetup[3]);
-        buttonD.setText(qSetup[4]);
+        buttonA.setText("A. " + qSetup[1]);
+        buttonB.setText("B. " + qSetup[2]);
+        buttonC.setText("C. " + qSetup[3]);
+        buttonD.setText("D. " + qSetup[4]);
         roundCounter.setText("Round " + newGame.round + " / " + newGame.MAX_ROUND);
         updateLadder(newGame.round);
 
-        // Reset answer buttons visibility
+        // Reset answer buttons visibility and opacity
         for (Button btn : answerButtons) {
             btn.setVisible(true);
-            btn.setStyle(""); //  CLEAR previous color
-            btn.setDisable(false); // optional safety
+            btn.setStyle(""); // CLEAR previous color
+
+            // FIX: Make clickable and bright again for new round
+            btn.setMouseTransparent(false);
+            btn.setOpacity(1.0);
         }
     }
 
@@ -131,8 +136,13 @@ public class GameScreenController {
             return;
         }
 
-        for (Button btn : answerButtons) btn.setDisable(true);
-
+        // FIX: Lock all, but only dim the unselected ones
+        for (int i = 0; i < answerButtons.length; i++) {
+            answerButtons[i].setMouseTransparent(true); // Stop clicks
+            if (i != answerNumber) {
+                answerButtons[i].setOpacity(0.5); // Fade out the ones you didn't pick
+            }
+        }
 
         AudioManager.getInstance().playClip("DrumRoll");
         AudioManager.getInstance().setBackgroundVolume(0.0);  // pause for drum roll
@@ -145,31 +155,39 @@ public class GameScreenController {
             boolean[] verified = newGame.answerChecker(answerNumber);
 
             if (verified[0]) { // Correct
+                // Ensure the correct button is bright (opacity 1.0) and Green
+                answerButtons[answerNumber].setOpacity(1.0);
                 answerButtons[answerNumber].setStyle("-fx-background-color: green;");
 
                 AudioManager.getInstance().playClip("Correct");
                 PauseTransition correctDelay = getPauseTransition(verified);
                 correctDelay.play();
-                AudioManager.getInstance().setBackgroundVolume(0.5);  // after correct
-                } else {
-                    answerButtons[newGame.getCorrectAnswer()].setStyle("-fx-background-color: green;");
-                    answerButtons[answerNumber].setStyle("-fx-background-color: red;");
+                AudioManager.getInstance().setBackgroundVolume(0.5);
+            } else {
+                // Wrong
 
-                    AudioManager.getInstance().playClip("Wrong");
-                    PauseTransition wrongDelay = new PauseTransition(Duration.seconds(WRONG_CLIP_DURATION));
-                    wrongDelay.setOnFinished(e -> {
-                                AudioManager.getInstance().stopClip("Wrong");
-                                endGame(false);
-                            });
-                    wrongDelay.play();
-                }
+                // 1. Force the ACTUAL correct answer to be bright and Green
+                answerButtons[newGame.getCorrectAnswer()].setOpacity(1.0);
+                answerButtons[newGame.getCorrectAnswer()].setStyle("-fx-background-color: green;");
+
+                // 2. Turn the User's Wrong answer Red
+                answerButtons[answerNumber].setStyle("-fx-background-color: red;");
+
+                AudioManager.getInstance().playClip("Wrong");
+                PauseTransition wrongDelay = new PauseTransition(Duration.seconds(WRONG_CLIP_DURATION));
+                wrongDelay.setOnFinished(e -> {
+                    AudioManager.getInstance().stopClip("Wrong");
+                    endGame(false);
+                });
+                wrongDelay.play();
+            }
         });
         revealDelay.play();
 
     }
 
     private PauseTransition getPauseTransition(boolean[] verified) {
-        PauseTransition correctDelay = new PauseTransition(Duration.seconds(HIGHLIGHT_WRONG_AND_CORRECT_DURATION)); // let player see green
+        PauseTransition correctDelay = new PauseTransition(Duration.seconds(HIGHLIGHT_WRONG_AND_CORRECT_DURATION));
         correctDelay.setOnFinished(e -> {
 
             AudioManager.getInstance().stopClip("Correct");
@@ -177,7 +195,8 @@ public class GameScreenController {
                 endGame(true);
             } else {
                 loadNextQuestion();
-                for (Button btn : answerButtons) btn.setDisable(false);
+                // FIX: Re-enable clicks for next round
+                for (Button btn : answerButtons) btn.setMouseTransparent(false);
             }
         });
         return correctDelay;
@@ -237,8 +256,19 @@ public class GameScreenController {
         }
     }
 
-    public void updateLadder(int roundsWon) {
-        for (Rectangle box : ladderBoxes) box.setVisible(false);
-        for (int i = 0; i < roundsWon; i++) ladderBoxes.get(i).setVisible(true);
+    public void updateLadder(int roundsWon) { int currentIndex = roundsWon - 1;
+        for (int i = 0; i < ladderBoxes.size(); i++) {
+            javafx.scene.shape.Rectangle box = ladderBoxes.get(i);
+            if (i < currentIndex) {
+                box.setVisible(true);
+                box.setFill(Color.rgb(50, 205, 50, 0.5));
+            } else if (i == currentIndex) {
+                box.setVisible(true);
+                box.setFill(Color.ORANGE);
+                box.setOpacity(1.0);
+            } else {
+                box.setVisible(false);
+            }
+        }
     }
 }
