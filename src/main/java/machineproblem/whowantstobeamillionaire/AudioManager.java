@@ -29,10 +29,10 @@ public class AudioManager {
     }
     // Auto load all clips first so no more file searching for .wav (different for mp3)
     private void loadAllClips() {
-        loadClip("Transition1", "/audio/Transition1.wav", 0.3);
-        loadClip("DrumRoll", "/audio/DrumRoll.wav", 0.3);
-        loadClip("Correct", "/audio/Correct.wav", 0.3);
-        loadClip("Wrong", "/audio/Wrong.wav", 0.3);
+        loadClip("Transition1", "/Audio/Transition1.wav", 0.3);
+        loadClip("DrumRoll", "/Audio/DrumRoll.wav", 0.3);
+        loadClip("Correct", "/Audio/Correct.wav", 0.3);
+        loadClip("Wrong", "/Audio/Wrong.wav", 0.3);
     }
 
     public static AudioManager getInstance() {

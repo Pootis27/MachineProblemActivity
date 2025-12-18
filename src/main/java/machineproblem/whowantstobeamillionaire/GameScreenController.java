@@ -69,7 +69,7 @@ public class GameScreenController {
         PauseTransition stingerDelay = new PauseTransition(Duration.seconds(4)); // adjust to your stinger length
         stingerDelay.setOnFinished(event -> {
             // Start new background music for game screen
-            AudioManager.getInstance().playBackground("/audio/Background2-Stage1.mp3", 0.5);
+            AudioManager.getInstance().playBackground("/Audio/Background2-Stage1.mp3", 0.5);
         });
         stingerDelay.play();
 
