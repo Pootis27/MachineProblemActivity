@@ -205,8 +205,7 @@ public class GameScreenController {
     @FXML private void lifeline1() {
         lifeline1.setVisible(false);
         System.out.println("TRIGGERED LIFELINE!!");
-        int result = newGame.callAFriend();
-        System.out.println(result);
+        newGame.callAFriend();
     }
 
     @FXML private void lifeline2() {

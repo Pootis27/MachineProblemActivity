@@ -70,14 +70,10 @@ public class MainGame {
         System.out.println("ya lose lmao");
     }
 
-    public int callAFriend() {
-        //TODO: Call a friend logic. We know the correct answer in this class. Get that and then have like a 70% chance of the friend being right.
-        //TODO: make sure also to keep track of when it has been used in the game or not
-        //NOTE: better to not change the name so UI guy doesn't have to update what needs to be called
-
+    public void callAFriend() {
         // 70% chance to return the correct answer
         if (rand.nextDouble() < CALL_A_FRIEND_CORRECT_CHANCE) {
-            return correct_answer;
+            CallAFriendAudio.playAudio(correct_answer);
         }
 
         // 30% chance: pick one of the 3 wrong answers
@@ -87,7 +83,7 @@ public class MainGame {
         if (pick >= correct_answer) {
             pick++;
         }
-        return pick;
+        CallAFriendAudio.playAudio(pick);
     }
 
 
