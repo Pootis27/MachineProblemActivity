@@ -19,7 +19,7 @@ public class MainMenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Play main menu background music at 50% volume
-        AudioManager.getInstance().playBackground("/audio/Background1.mp3", 0.5);
+        AudioManager.getInstance().playBackground("/Audio/Background1.mp3", 0.5);
     }
 
     @FXML

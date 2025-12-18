@@ -8,7 +8,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
-public class TestChartClass {
+public class AudienceChart {
     private static final Stage stage = new Stage(); // class-level stage
     public static void showGraph(int[] values) {
         stage.setTitle("Answer Frequencies");

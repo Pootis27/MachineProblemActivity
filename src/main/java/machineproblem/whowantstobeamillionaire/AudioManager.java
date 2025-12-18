@@ -93,4 +93,9 @@ public class AudioManager {
             backgroundPlayer.play();
         }
     }
+    public void setBackgroundVolume(double volume) {
+        if (backgroundPlayer != null) {
+            backgroundPlayer.setVolume(volume);
+        }
+    }
 }

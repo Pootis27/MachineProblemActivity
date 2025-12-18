@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.animation.PauseTransition;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +20,9 @@ import java.util.List;
 public class GameScreenController {
 
     private MainGame newGame;
-
+    final int DRUM_ROLL_DURATION = 3;
+    final int HIGHLIGHT_WRONG_AND_CORRECT_DURATION = 3;
+    final int WRONG_CLIP_DURATION = 2;
     // resources Universal
     @FXML protected Label questionLabel;
     @FXML protected Label roundCounter;
@@ -123,7 +124,7 @@ public class GameScreenController {
 
     private void handleAnswer(int answerNumber) {
         // close graph regardless
-        TestChartClass.closeGraph();
+        AudienceChart.closeGraph();
 
         if (lifeline4Status) {
             lifeline4Logic(answerNumber);
@@ -134,8 +135,9 @@ public class GameScreenController {
 
 
         AudioManager.getInstance().playClip("DrumRoll");
+        AudioManager.getInstance().setBackgroundVolume(0.0);  // pause for drum roll
 
-        PauseTransition revealDelay = new PauseTransition(Duration.seconds(2));
+        PauseTransition revealDelay = new PauseTransition(Duration.seconds(DRUM_ROLL_DURATION));
         revealDelay.setOnFinished(event -> {
 
             AudioManager.getInstance().stopClip("DrumRoll");
@@ -148,12 +150,13 @@ public class GameScreenController {
                 AudioManager.getInstance().playClip("Correct");
                 PauseTransition correctDelay = getPauseTransition(verified);
                 correctDelay.play();
+                AudioManager.getInstance().setBackgroundVolume(0.5);  // after correct
                 } else {
                     answerButtons[newGame.getCorrectAnswer()].setStyle("-fx-background-color: green;");
                     answerButtons[answerNumber].setStyle("-fx-background-color: red;");
 
                     AudioManager.getInstance().playClip("Wrong");
-                    PauseTransition wrongDelay = new PauseTransition(Duration.seconds(2));
+                    PauseTransition wrongDelay = new PauseTransition(Duration.seconds(WRONG_CLIP_DURATION));
                     wrongDelay.setOnFinished(e -> {
                                 AudioManager.getInstance().stopClip("Wrong");
                                 endGame(false);
@@ -166,7 +169,7 @@ public class GameScreenController {
     }
 
     private PauseTransition getPauseTransition(boolean[] verified) {
-        PauseTransition correctDelay = new PauseTransition(Duration.seconds(2.5)); // let player see green
+        PauseTransition correctDelay = new PauseTransition(Duration.seconds(HIGHLIGHT_WRONG_AND_CORRECT_DURATION)); // let player see green
         correctDelay.setOnFinished(e -> {
 
             AudioManager.getInstance().stopClip("Correct");
@@ -192,7 +195,7 @@ public class GameScreenController {
         System.out.println("TRIGGERED LIFELINE!!");
         int[] results = newGame.audienceVote();
         for (int result : results) System.out.println(result);
-        TestChartClass.showGraph(results);
+        AudienceChart.showGraph(results);
     }
 
     @FXML private void lifeline3() {
