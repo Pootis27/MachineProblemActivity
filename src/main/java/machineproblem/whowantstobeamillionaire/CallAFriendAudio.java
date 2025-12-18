@@ -1,7 +1,6 @@
 package machineproblem.whowantstobeamillionaire;
 
 import javax.sound.sampled.*;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -44,13 +43,23 @@ public class CallAFriendAudio {
         });
 
     }
-    public static void playAudio(int correct_answer) {
-        Random rand = new Random();
-        String chosen_character = voice_list[rand.nextInt(voice_list.length)];
-        String questionPath = "/voice/" + chosen_character + "/" + voice_dict.get(chosen_character)[4];
-        String answerPath   = "/voice/" + chosen_character + "/" + voice_dict.get(chosen_character)[correct_answer];
-        playSound(questionPath);
-        playSound(answerPath);
+    public static void playAudio(int answerIndex, Runnable onFinished) {
+        new Thread(() -> {
+            Random rand = new Random();
+            String chosen_character = voice_list[rand.nextInt(voice_list.length)];
+            String[] audios = voice_dict.get(chosen_character);
+
+            String questionPath = "/voice/" + chosen_character + "/" + audios[4];
+            String answerPath   = "/voice/" + chosen_character + "/" + audios[answerIndex];
+
+            playSound(questionPath);
+            playSound(answerPath);
+
+            // callback on JavaFX thread
+            if (onFinished != null) {
+                javafx.application.Platform.runLater(onFinished);
+            }
+        }).start();
     }
 
     public static void playSound(String resourcePath) {

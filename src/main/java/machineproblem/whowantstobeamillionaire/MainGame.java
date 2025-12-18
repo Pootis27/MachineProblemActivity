@@ -17,7 +17,6 @@ public class MainGame {
     };
     final int MAX_ROUND = 15;        //set to 1 for easier testing of game end and game complete
     private int correct_answer;
-    private final int trials = 100; //for lifeline1
     public int score;
     public int round;
     private final Random rand = new Random();
@@ -60,32 +59,21 @@ public class MainGame {
         return verified;
     }
 
-    public void gameCompleted() {
-        //TODO: whatever the fuck to do with game complete.
-        System.out.println("congrats i guess");
-    }
-
-    public void gameOver() {
-        //TODO: whatever the fuck to do with game over.
-        System.out.println("ya lose lmao");
-    }
-
     public void callAFriend() {
-        // 70% chance to return the correct answer
+        int answerToPlay;
         if (rand.nextDouble() < CALL_A_FRIEND_CORRECT_CHANCE) {
-            CallAFriendAudio.playAudio(correct_answer);
+            answerToPlay = correct_answer;
+        } else {
+            int pick = rand.nextInt(3); // 0,1,2
+            if (pick >= correct_answer) pick++;
+            answerToPlay = pick;
         }
 
-        // 30% chance: pick one of the 3 wrong answers
-        int pick = rand.nextInt(3); // 0, 1, or 2
-
-        // Shift index to skip correct_answer
-        if (pick >= correct_answer) {
-            pick++;
-        }
-        CallAFriendAudio.playAudio(pick);
+        // play audio and resume background when done
+        CallAFriendAudio.playAudio(answerToPlay, () -> {
+            AudioManager.getInstance().setBackgroundVolume(0.5);
+        });
     }
-
 
     public int[] audienceVote() {
         int[] counts = new int[4]; // 4 answer options

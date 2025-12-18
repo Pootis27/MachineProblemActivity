@@ -202,10 +202,12 @@ public class GameScreenController {
         return correctDelay;
     }
 
-    @FXML private void lifeline1() {
+    @FXML
+    private void lifeline1() {
+        AudioManager.getInstance().setBackgroundVolume(0.0);
         lifeline1.setVisible(false);
         System.out.println("TRIGGERED LIFELINE!!");
-        newGame.callAFriend();
+        newGame.callAFriend(); // now pauses/resumes music automatically
     }
 
     @FXML private void lifeline2() {

@@ -56,7 +56,7 @@
                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="405.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
                <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                   <children>
-                     <Rectangle fx:id="ladderBox15" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="38.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0">
+                     <Rectangle fx:id="ladderBox15" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="38.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="190.0">
                         <VBox.margin>
                            <Insets />
                         </VBox.margin>
@@ -76,20 +76,20 @@
                            <Insets />
                         </VBox.margin>
                      </Rectangle>
-                     <Rectangle fx:id="ladderBox11" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox11" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
                      <Rectangle fx:id="ladderBox10" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
-                     <Rectangle fx:id="ladderBox9" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox9" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="26.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
                      <Rectangle fx:id="ladderBox8" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
                      <Rectangle fx:id="ladderBox7" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
-                     <Rectangle fx:id="ladderBox6" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="27.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
-                     <Rectangle fx:id="ladderBox5" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="21.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
-                     <Rectangle fx:id="ladderBox4" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox6" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox5" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="26.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
+                     <Rectangle fx:id="ladderBox4" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
                      <Rectangle fx:id="ladderBox3" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
                      <Rectangle fx:id="ladderBox2" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
                      <Rectangle fx:id="ladderBox1" arcHeight="5.0" arcWidth="5.0" fill="#2197ff8e" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" />
                   </children>
                </VBox>
-               <ImageView fx:id="ladderImage" fitHeight="492.0" fitWidth="197.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fx:id="ladderImage" fitHeight="417.0" fitWidth="208.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@ScoreLadder.png" />
                   </image>
