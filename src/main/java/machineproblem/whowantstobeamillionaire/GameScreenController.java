@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.animation.PauseTransition;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,8 +56,23 @@ public class GameScreenController {
     private List<Rectangle> ladderBoxes;
     @FXML protected ImageView ladderImage;
 
+
     @FXML
     public void initialize() {
+        // Stop previous background music immediately (main menu)
+        AudioManager.getInstance().stopBackground();
+
+        // Play transition stinger first
+        AudioManager.getInstance().playClip("Transition1"); // your WAV stinger
+
+        // Wait for stinger duration before starting game background
+        PauseTransition stingerDelay = new PauseTransition(Duration.seconds(4)); // adjust to your stinger length
+        stingerDelay.setOnFinished(event -> {
+            // Start new background music for game screen
+            AudioManager.getInstance().playBackground("/audio/Background2-Stage1.mp3", 0.5);
+        });
+        stingerDelay.play();
+
         ladderBoxes = new ArrayList<>();
         ladderBoxes.add(ladderBox1);
         ladderBoxes.add(ladderBox2);
@@ -114,21 +130,54 @@ public class GameScreenController {
             return;
         }
 
-        boolean[] verified = newGame.answerChecker(answerNumber);
-        if (verified[0]) {
+        for (Button btn : answerButtons) btn.setDisable(true);
+
+
+        AudioManager.getInstance().playClip("DrumRoll");
+
+        PauseTransition revealDelay = new PauseTransition(Duration.seconds(2));
+        revealDelay.setOnFinished(event -> {
+
+            AudioManager.getInstance().stopClip("DrumRoll");
+
+            boolean[] verified = newGame.answerChecker(answerNumber);
+
+            if (verified[0]) { // Correct
+                answerButtons[answerNumber].setStyle("-fx-background-color: green;");
+
+                AudioManager.getInstance().playClip("Correct");
+                PauseTransition correctDelay = getPauseTransition(verified);
+                correctDelay.play();
+                } else {
+                    answerButtons[newGame.getCorrectAnswer()].setStyle("-fx-background-color: green;");
+                    answerButtons[answerNumber].setStyle("-fx-background-color: red;");
+
+                    AudioManager.getInstance().playClip("Wrong");
+                    PauseTransition wrongDelay = new PauseTransition(Duration.seconds(2));
+                    wrongDelay.setOnFinished(e -> {
+                                AudioManager.getInstance().stopClip("Wrong");
+                                endGame(false);
+                            });
+                    wrongDelay.play();
+                }
+        });
+        revealDelay.play();
+
+    }
+
+    private PauseTransition getPauseTransition(boolean[] verified) {
+        PauseTransition correctDelay = new PauseTransition(Duration.seconds(2.5)); // let player see green
+        correctDelay.setOnFinished(e -> {
+
+            AudioManager.getInstance().stopClip("Correct");
             if (verified[1]) {
                 endGame(true);
             } else {
                 loadNextQuestion();
+                for (Button btn : answerButtons) btn.setDisable(false);
             }
-        } else {
-            answerButtons[newGame.getCorrectAnswer()].setStyle("-fx-background-color: green;");
-            answerButtons[answerNumber].setStyle("-fx-background-color: red;");
-
-            PauseTransition pause = new PauseTransition(Duration.seconds(3));
-            pause.setOnFinished(event -> endGame(false));
-            pause.play();
-        }
+        });
+        return correctDelay;
     }
 
     @FXML private void lifeline1() {
