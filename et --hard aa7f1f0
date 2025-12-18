@@ -1,0 +1,39 @@
+[33maa7f1f0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m HEAD@{0}: reset: moving to HEAD
+[33maa7f1f0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m HEAD@{1}: reset: moving to aa7f1f076a01f9721e211eb0de4a8d4787615a7a
+[33me9f4991[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mTTS-Test[m[33m)[m HEAD@{2}: checkout: moving from TTS-Test to master
+[33me9f4991[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mTTS-Test[m[33m)[m HEAD@{3}: checkout: moving from master to TTS-Test
+[33me9f4991[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mTTS-Test[m[33m)[m HEAD@{4}: checkout: moving from master to master
+[33me9f4991[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mTTS-Test[m[33m)[m HEAD@{5}: pull origin master: Fast-forward
+[33maa7f1f0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m HEAD@{6}: checkout: moving from TTS-Test to master
+[33me9f4991[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mTTS-Test[m[33m)[m HEAD@{7}: pull origin master: Fast-forward
+[33m897a61b[m[33m ([m[1;31morigin/TTS-Test[m[33m)[m HEAD@{8}: commit (amend): Experimental TTS for call a friend
+[33m3300b0e[m HEAD@{9}: commit: updated objects.csv and questions.csv to make questions make sense. added places.csv, and updated QuestionSetup.java to include places.csv
+[33maa7f1f0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m HEAD@{10}: checkout: moving from master to TTS-Test
+[33maa7f1f0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m HEAD@{11}: checkout: moving from master to master
+[33maa7f1f0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m HEAD@{12}: pull origin master: Fast-forward
+[33m6a9cc9c[m HEAD@{13}: checkout: moving from master to master
+[33m6a9cc9c[m HEAD@{14}: checkout: moving from aa7f1f076a01f9721e211eb0de4a8d4787615a7a to master
+[33maa7f1f0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m HEAD@{15}: checkout: moving from master to origin/master
+[33m6a9cc9c[m HEAD@{16}: checkout: moving from fix/finalScore to master
+[33mbb5cdf1[m[33m ([m[1;31morigin/fix/finalScore[m[33m, [m[1;32mfix/finalScore[m[33m)[m HEAD@{17}: checkout: moving from LandmineTest to fix/finalScore
+[33m9f02caa[m[33m ([m[1;31morigin/LandmineTest[m[33m, [m[1;32mLandmineTest[m[33m)[m HEAD@{18}: commit: updated objects.csv and questions.csv to make questions make sense. added places.csv, and updated QuestionSetup.java to include places.csv
+[33m6a9cc9c[m HEAD@{19}: checkout: moving from master to LandmineTest
+[33m6a9cc9c[m HEAD@{20}: commit: updated objects.csv and questions.csv to make questions make sense. added places.csv, and updated QuestionSetup.java to include places.csv
+[33mcffa1e9[m HEAD@{21}: checkout: moving from master to master
+[33mcffa1e9[m HEAD@{22}: pull: Fast-forward
+[33m6161852[m HEAD@{23}: checkout: moving from master to master
+[33m6161852[m HEAD@{24}: checkout: moving from 379f7e9d864ffa3aa44380d548f25221e7669f19 to master
+[33m379f7e9[m[33m ([m[1;31morigin/detached[m[33m)[m HEAD@{25}: commit: made some changes and had to go through time travel and parallel universes to get it working
+[33m6161852[m HEAD@{26}: reset: moving to 6161852fad789b555042ea79d746cec21b6f787f
+[33m354f27c[m HEAD@{27}: checkout: moving from master to 354f27c6f9960e0ecf374161c21ba46864a3e115
+[33m6161852[m HEAD@{28}: reset: moving to 6161852fad789b555042ea79d746cec21b6f787f
+[33mc1876b0[m[33m ([m[1;31morigin/Ui-editing[m[33m, [m[1;32mUi-editing[m[33m)[m HEAD@{29}: merge origin/Ui-editing: Fast-forward
+[33m6161852[m HEAD@{30}: reset: moving to 6161852fad789b555042ea79d746cec21b6f787f
+[33m39c2f51[m HEAD@{31}: checkout: moving from Ui-editing to master
+[33m6161852[m HEAD@{32}: reset: moving to 6161852fad789b555042ea79d746cec21b6f787f
+[33m56f76b4[m HEAD@{33}: reset: moving to 56f76b4b3ec8025c0268dd459a31b70d4cc7a370
+[33mc1876b0[m[33m ([m[1;31morigin/Ui-editing[m[33m, [m[1;32mUi-editing[m[33m)[m HEAD@{34}: checkout: moving from Ui-editing to Ui-editing
+[33mc1876b0[m[33m ([m[1;31morigin/Ui-editing[m[33m, [m[1;32mUi-editing[m[33m)[m HEAD@{35}: checkout: moving from master to Ui-editing
+[33m39c2f51[m HEAD@{36}: checkout: moving from master to master
+[33m39c2f51[m HEAD@{37}: checkout: moving from master to master
+[33m39c2f51[m HEAD@{38}: clone: from https://github.com/Pootis27/MachineProblemActivity.git
