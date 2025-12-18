@@ -1,0 +1,95 @@
+.game-button { -fx-background-color: linear-gradient(to bottom, #004e92, #000428); -fx-text-fill: white; -fx-font-family: "Verdana"; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 30; -fx-border-color: silver; -fx-border-radius: 30; -fx-border-width: 2px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 1); }
+
+.game-button:hover { -fx-background-color: linear-gradient(to bottom, #0072ff, #00c6ff); -fx-cursor: hand; -fx-border-color: white; }
+
+.game-button:pressed { -fx-background-color: #ff9900; -fx-text-fill: black; }
+
+/* Specific style for Lifelines (Oval Shape) */
+.lifeline-button {
+    -fx-background-color: linear-gradient(to bottom, #003366, #00509d); /* Blue Gradient */
+    -fx-background-radius: 50; /* Makes it completely oval */
+    -fx-border-color: #ffd700; /* Gold Border */
+    -fx-border-radius: 50;
+    -fx-border-width: 3px;
+    -fx-text-fill: white;
+    -fx-font-family: "Verdana";
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-effect: dropshadow(three-pass-box, black, 5, 0, 0, 2);
+    -fx-cursor: hand;
+}
+
+.lifeline-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #00509d, #0073e6); /* Lighter Blue on Hover */
+    -fx-effect: dropshadow(three-pass-box, #ffd700, 15, 0.3, 0, 0); /* Gold Glow */
+}
+
+.lifeline-button:pressed {
+    -fx-background-color: #002244; /* Darker when clicked */
+    -fx-translate-y: 2; /* Slight movement down */
+}
+
+.button:disabled { -fx-background-color: #333333; -fx-text-fill: #666666; -fx-border-color: #555555; -fx-opacity: 0.8; }
+
+.root { -fx-background-color: radial-gradient(focus-angle 0deg, focus-distance 0%, center 50% 50%, radius 100%, #0b3d91, #000000); }
+
+.label { -fx-text-fill: white; -fx-font-family: "Copperplate Gothic Bold", "Verdana", sans-serif; -fx-font-size: 18px; -fx-effect: dropshadow(one-pass-box, black, 2, 0, 1, 1); }
+
+#questionLabel { -fx-font-size: 28px; -fx-font-weight: bold; -fx-alignment: center; }
+
+#mainTitle { -fx-font-size: 50px; -fx-font-family: "Copperplate Gothic Bold", "Verdana"; -fx-text-fill: linear-gradient(to bottom, #ffd700, #ff8c00); -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 5); -fx-alignment: center; -fx-text-alignment: center; }
+
+#finalScore { -fx-font-size: 42px; -fx-text-fill: #ffd700; -fx-font-weight: bold; -fx-effect: dropshadow(two-pass-box, black, 5, 0, 0, 3); }
+
+#endMessage { -fx-font-size: 58px; -fx-text-fill: white; -fx-effect: dropshadow(one-pass-box, black, 5, 0, 0, 2); }
+
+#roundCounter {
+    -fx-text-fill: white;
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+
+    /* Dark semi-transparent background to make it readable */
+    -fx-background-color: rgba(0, 0, 0, 0.6);
+    -fx-background-radius: 20; /* Fully rounded corners (pill shape) */
+
+    /* Gold Border */
+    -fx-border-color: #ffd700;
+    -fx-border-radius: 20;
+    -fx-border-width: 2px;
+
+    /* Spacing inside the pill */
+    -fx-padding: 8 20 8 20; /* Top, Right, Bottom, Left */
+
+    -fx-effect: dropshadow(three-pass-box, black, 5, 0, 0, 1);
+}
+
+#ladderHeader {
+    /* Start with White at the top for a "shine" effect, fading to Gold */
+    -fx-text-fill: linear-gradient(to bottom, #ffffff, #ffd700);
+
+    -fx-font-family: "Copperplate Gothic Bold", "Verdana";
+    -fx-font-size: 24px; /* Increased size slightly */
+    -fx-font-weight: bold;
+
+    /* A stronger, slightly spread-out shadow to make it stand out */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0.5, 2, 2);
+
+    -fx-padding: 0 0 15 0;
+}
+
+#mainTitle {
+    /* 1. The Gradient: White top fading to Gold bottom simulates a light reflection */
+    -fx-text-fill: linear-gradient(to bottom, #ffffff 0%, #ffd700 100%);
+
+    /* 2. The Font: Classic Game Show style */
+    -fx-font-family: "Copperplate Gothic Bold", "Verdana", sans-serif;
+    -fx-font-size: 55px; /* Much larger than the ladder text */
+    -fx-font-weight: bold;
+
+    /* 3. The Shadow: Heavy black glow to make it pop off the blue background */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1.0), 10, 0, 0, 5);
+
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
