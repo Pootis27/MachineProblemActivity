@@ -15,18 +15,32 @@
 
 <BorderPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="machineproblem.whowantstobeamillionaire.GameScreenController">
 
-    <!-- TOP: Question and Round -->
+    <!-- TOP: Question and Round + Forfeit -->
     <top>
-        <VBox spacing="10.0" BorderPane.alignment="CENTER">
-            <Label id="roundCounter" fx:id="roundCounter" style="-fx-font-size: 24;" text="Round 1 / 5">
-            <VBox.margin>
-               <Insets />
-            </VBox.margin></Label>
-            <Label fx:id="questionLabel" alignment="CENTER" prefHeight="55.0" prefWidth="1340.0" style="-fx-font-size: 38;" text="Question goes here" wrapText="true" />
-         <BorderPane.margin>
-            <Insets left="15.0" top="15.0" />
-         </BorderPane.margin>
-        </VBox>
+        <StackPane prefHeight="120" prefWidth="1280" BorderPane.alignment="CENTER">
+            <Label id="roundCounter" fx:id="roundCounter" style="-fx-font-size: 24;" text="Round 1 / 5"
+                   StackPane.alignment="TOP_LEFT">
+                <StackPane.margin>
+                    <Insets top="10" left="10"/>
+                </StackPane.margin>
+            </Label>
+
+            <VBox spacing="10.0" alignment="CENTER">
+                <StackPane.margin>
+                    <Insets top="50.0" /> </StackPane.margin>
+                <Label fx:id="questionLabel" alignment="CENTER" prefHeight="80.0" prefWidth="1340.0"
+                       style="-fx-font-size: 38;" text="Question goes here" wrapText="true" />
+            </VBox>
+
+            <Button fx:id="forfeitButton" text="Forfeit" onAction="#forfeit"
+                    styleClass="lifeline-button"
+                    StackPane.alignment="TOP_RIGHT"
+                    prefWidth="120" prefHeight="40">
+                <StackPane.margin>
+                    <Insets top="10" right="10"/>
+                </StackPane.margin>
+            </Button>
+        </StackPane>
     </top>
 
     <!-- CENTER: Answer Buttons in 2x2 Grid -->
@@ -107,7 +121,7 @@
                <Button fx:id="lifeline3" onAction="#lifeline3" prefHeight="70" prefWidth="180" styleClass="lifeline-button" text="50/50" />
                <Button fx:id="lifeline1" onAction="#lifeline1" prefHeight="70" prefWidth="180" styleClass="lifeline-button" text="Call a Friend" />
                <Button fx:id="lifeline2" onAction="#lifeline2" prefHeight="70" prefWidth="180" styleClass="lifeline-button" text="Audience" />
-               <Button fx:id="lifeline4" onAction="#lifeline4" prefHeight="71.0" prefWidth="177.0" styleClass="lifeline-button" text="Mystery" />
+               <Button fx:id="lifeline4" onAction="#lifeline4" prefHeight="71.0" prefWidth="177.0" styleClass="lifeline-button" text="Landmine Checker" />
          </children>
          <padding>
             <Insets right="15.0" />
