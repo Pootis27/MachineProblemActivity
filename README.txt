@@ -19,6 +19,27 @@ Of course, it's not just endless trivia question. We feature:
 - Music which are definitely not ours
 - Endless fun with randomized options and questions [not really endless]
 
+*\ Features /*
+- Questions
+  - Randomized for each stage with randomized options based on the question's category
+- Score Tracker
+  - Visualized as a score ladder which fills up as player gets more questions right
+  - Indicates the checkpoints
+- 4 Lifelines
+  - 50/50: Hides 2 incorrect answer
+  - Call A Friend: Chooses a random person from a predefined list and plays their corresponding audio to tell the answer. Friend's Answer has 70% chance to be correct
+  - Ask the Audience: Simulate 100 audience voting each having 40% chance of voting the correct answer. Then display a graph of their votes
+  - Landmine Checker: Choose an option, and it will indicate if that answer is right or wrong
+- Safe Haven
+  - Checkpoint for the player which guarantees they get the money at safe haven if they choose wrong in subsequent questions
+- Forfeit
+  - End the game prematurely and get the money at that stage instead
+- Audio
+  - Background Music that plays and pauses at appropriate times
+  - Stinger sound effects for correct and wrong
+  - Music for main menu and end screen
+
+
 
 MACHINE PROBLEM FINALS: Who Wants to be a Millionaire?
 Developed By:
