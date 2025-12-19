@@ -13,9 +13,9 @@ b) Clone the repository using your IDE’s Git integration: https://github.com/P
 
 *\ Introduction /*
 Welcome to who wants to be a millionaire. A game where each question you get right in a row increases the money prize you can get (monopoly money in this case of course).
-Of course it's not just endless trivia question. We feature:
+Of course, it's not just endless trivia question. We feature:
 - Lifelines to save you from a particularly hard question
-- Cameos from Miku, Gman, and some random turtle dude [not really. It's just one of the devs badly imitating them and using AI, and Miku being text to speech]
+- Cameos from Miku, Gman, some random turtle dude, and a woman [not really. It's just one of the devs badly imitating them and using AI, and Miku being text to speech]
 - Music which are definitely not ours
 - Endless fun with randomized options and questions [not really endless]
 

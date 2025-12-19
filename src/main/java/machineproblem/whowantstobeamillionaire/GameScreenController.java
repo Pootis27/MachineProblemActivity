@@ -37,8 +37,10 @@ public class GameScreenController {
     @FXML protected Button lifeline2;
     @FXML protected Button lifeline3;
     @FXML protected Button lifeline4;
+    @FXML protected Button forfeitButton;
 
     private Button[] answerButtons;
+    private Button[] lifelineButtons;
     public boolean lifeline4Status;
 
     // Ladder Score
@@ -99,6 +101,7 @@ public class GameScreenController {
     public void startNewGame() {
         newGame = new MainGame();  // start new game
         answerButtons = new Button[]{buttonA, buttonB, buttonC, buttonD}; // for easier handling of option buttons later on
+        lifelineButtons = new Button[] {lifeline1, lifeline2, lifeline3, lifeline4};
         loadNextQuestion();
     }
 
@@ -122,9 +125,16 @@ public class GameScreenController {
             btn.setMouseTransparent(false);
             btn.setOpacity(1.0);
         }
+
+        for (Button button : lifelineButtons) {
+            button.setMouseTransparent(false);
+            button.setOpacity(1.0);
+        }
+
+        forfeitButton.setMouseTransparent(false);
+        forfeitButton.setOpacity(1.0);
+
     }
-    // Handle Forfeit ruling
-    @FXML private Button forfeitButton;
 
     @FXML
     private void forfeit() {
@@ -155,6 +165,16 @@ public class GameScreenController {
                 answerButtons[i].setOpacity(0.5); // Fade out the ones you didn't pick
             }
         }
+
+        for (Button button : lifelineButtons) {
+            button.setMouseTransparent(true);
+            button.setOpacity(0.5);
+        }
+
+        forfeitButton.setMouseTransparent(true);
+        forfeitButton.setOpacity(0.5);
+
+
 
         AudioManager.getInstance().playClip("DrumRoll");  // play drum roll
         AudioManager.getInstance().setBackgroundVolume(0.0);  // mute for drum roll
